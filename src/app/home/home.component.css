@@ -1,0 +1,55 @@
+.home-container {
+    padding: 15px;
+}
+
+@media (min-width: 2048px) and (orientation: landscape) {
+    .home-container {
+        padding: 0 29rem;
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.rate-item-view {
+    padding-left: 1rem;
+    align-items: center;
+}
+
+.rate-item-view .span-number-rate {
+    margin-top: 1%;
+}
+
+.start-itens {
+    justify-content: flex-start;
+}
+
+.center-itens {
+    justify-content: center;
+}
+
+.end-itens {
+    justify-content: flex-end;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.search-input-width {
+    width: 30%;
+    margin-top: 5%;
+}
+
+.title-home-lists {
+    margin-left: 2%;
+    margin-top: 5%;
+}
+
+.itens-card-footer-spacer {
+  flex: 1 1 auto;
+}

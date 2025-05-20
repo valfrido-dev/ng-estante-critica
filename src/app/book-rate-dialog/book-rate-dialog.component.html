@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Avaliar</h2>
+<mat-dialog-content>
+  <p>Dê sua nota:</p>
+  <mat-form-field class="full-width">
+    <mat-label>Nota</mat-label>
+    <mat-select [(ngModel)]="bookRating" name="bookRating">
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="4">4</mat-option>
+        <mat-option value="5">5</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>Dê sua opinião (Opcional):</p>
+  <mat-form-field class="full-width">
+    <mat-label>Deixe aqui seu comentário</mat-label>
+    <textarea matInput placeholder="" [(ngModel)]="comments"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onConfirm()" cdkFocusInitial>Avaliar</button>
+</mat-dialog-actions>

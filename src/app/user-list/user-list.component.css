@@ -1,0 +1,36 @@
+.user-list-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Espaço para pequenos dispositivos */
+}
+
+.user-list-card {
+    width: 100%;        /* Ocupa 100% do espaço disponível */
+    max-width: 900px;   /* Limita a largura máxima, ajuste esse valor conforme preferir */
+    box-sizing: border-box; /* Garante que padding e border sejam considerados no width */
+    padding: 1rem;      /* Espaçamento interno opcional */
+    margin: 2rem auto;       /* Centraliza horizontalmente caso o flex do container não seja aplicado */
+}
+
+.header-title {
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.full-width {
+    width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}

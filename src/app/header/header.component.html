@@ -1,0 +1,37 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menuHeader" aria-label="Menu principal da aplicação">
+    <mat-icon>menu_book</mat-icon>
+  </button>
+  <mat-menu #menuHeader="matMenu">
+    <button mat-menu-item [routerLink]="['/home']">
+        <mat-icon>library_books</mat-icon>
+        <span>Consultar Estante</span>
+    </button>
+    <button mat-menu-item *ngIf="isLoggedIn">
+        <mat-icon>bookmark</mat-icon>
+        <span>Minha lista</span>
+    </button>
+    <button mat-menu-item [routerLink]="['/book/register']" *ngIf="isLoggedIn && userLogged.isAdmin">
+        <mat-icon>book_6</mat-icon>
+        <span>Novo Livro</span>
+    </button>
+  </mat-menu>
+  <span>Estante Crítica - O guia para sua leitura</span>
+  <span class="itens-menu-spacer"></span>
+  <button mat-icon-button class="manage_accounts" aria-label="Gerenciar usuários" matTooltip="Gerenciar usuários"
+          *ngIf="isLoggedIn && userLogged.isAdmin" [routerLink]="['user/list']">
+    <mat-icon>manage_accounts</mat-icon>
+  </button>
+  <button mat-icon-button class="account_circle" aria-label="Usuario logado" matTooltip="{{userLogged.name}}" *ngIf="isLoggedIn">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Logout, Sair" matTooltip="Sair" *ngIf="isLoggedIn" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Novo Acesso" [routerLink]="['/user/register']" matTooltip="Cadastrar usuário" *ngIf="!isLoggedIn">
+    <mat-icon>person_add</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Login, Entrar" [routerLink]="['/login']" matTooltip="Entrar" *ngIf="!isLoggedIn">
+    <mat-icon>login</mat-icon>
+  </button>
+</mat-toolbar>

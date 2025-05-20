@@ -1,0 +1,55 @@
+<div class="book-register-container">
+    <mat-card class="book-register-card">
+        <mat-card-header class="header-title">
+            <mat-card-title>Cadastrar um novo livro</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="bookRegisterForm" (ngSubmit)="onSubmit()">
+                <mat-grid-list cols="2" rowHeight="5:1">
+                    <mat-grid-tile>
+                        <mat-form-field class="full-width">
+                            <mat-label>Título</mat-label>
+                            <input matInput type="text" formControlName="title">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field class="full-width">
+                            <mat-label>Subtítulo (Opcional)</mat-label>
+                            <input matInput type="text" formControlName="subtitle">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field class="full-width">
+                            <mat-label>Autor</mat-label>
+                            <input matInput type="text" formControlName="authors">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field class="full-width">
+                            <mat-label>Categoria</mat-label>
+                            <input matInput type="text" formControlName="category">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field class="full-width">
+                            <mat-label>Editora</mat-label>
+                            <input matInput type="text" formControlName="publisher">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field class="full-width">
+                            <mat-label>Data de publicação</mat-label>
+                                <input matInput [matDatepicker]="dp" formControlName="publicationDate">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+                                <mat-datepicker #dp></mat-datepicker>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="2">
+                        <button mat-flat-button color="primary" type="submit" [disabled]="bookRegisterForm.invalid">Cadastrar</button>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

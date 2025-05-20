@@ -1,0 +1,48 @@
+<div class="user-register-container">
+    <mat-card class="user-register-card">
+        <mat-card-header class="header-title">
+            <mat-card-title>Cadastro (Primeiro acesso).</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="userRegisterForm" (ngSubmit)="onSubmit()">
+                <mat-grid-list cols="2" rowHeight="5:1">
+                    <mat-grid-tile colspan="2">
+                        <mat-form-field class="full-width">
+                            <mat-label>Nome</mat-label>
+                            <input matInput type="text" formControlName="name">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="2">
+                        <mat-form-field class="full-width">
+                            <mat-label>E-mail</mat-label>
+                            <input matInput type="email" formControlName="email">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field class="full-width">
+                            <mat-label>Nome de usuário</mat-label>
+                            <input matInput type="text" formControlName="username">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field class="full-width">
+                            <mat-label>Senha</mat-label>
+                            <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password">
+                            <button
+                                mat-icon-button
+                                matSuffix
+                                (click)="showHidePasswordEvent($event)"
+                                [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hidePassword()">
+                                <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="2">
+                        <button mat-flat-button color="primary" type="submit" [disabled]="userRegisterForm.invalid">Cadastrar</button>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

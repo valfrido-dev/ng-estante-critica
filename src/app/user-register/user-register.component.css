@@ -1,0 +1,38 @@
+.user-register-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Espaço para pequenos dispositivos */
+}
+
+.user-register-card {
+    width: 100%;        /* Ocupa 100% do espaço disponível */
+    max-width: 900px;   /* Limita a largura máxima, ajuste esse valor conforme preferir */
+    box-sizing: border-box; /* Garante que padding e border sejam considerados no width */
+    padding: 1rem;      /* Espaçamento interno opcional */
+    margin: 2rem auto;       /* Centraliza horizontalmente caso o flex do container não seja aplicado */
+}
+
+.header-title {
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.center-icon mat-icon {
+    margin-bottom: 10%;
+    font-size: 100px;
+    height: 100px;
+    width: 100px;
+}
+
+.center-button {
+    justify-content: center;
+}
+
+.end-button {
+    justify-content: flex-end;
+}
+
+.full-width {
+    width: 100%;
+}

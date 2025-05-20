@@ -1,0 +1,50 @@
+.book-detail-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Espaço para pequenos dispositivos */
+}
+
+.margin-comments {
+    margin-top: -5rem;
+}
+
+.book-detail-card {
+    width: 100%;        /* Ocupa 100% do espaço disponível */
+    max-width: 900px;   /* Limita a largura máxima, ajuste esse valor conforme preferir */
+    box-sizing: border-box; /* Garante que padding e border sejam considerados no width */
+    padding: 1rem;      /* Espaçamento interno opcional */
+    margin: 2rem auto;       /* Centraliza horizontalmente caso o flex do container não seja aplicado */
+}
+
+.header-title {
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.itens-spacer {
+  flex: 1 1 auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.start-itens {
+    justify-content: flex-start;
+}
+
+.center-itens {
+    justify-content: center;
+}
+
+.end-itens {
+    justify-content: flex-end;
+}
+
+.full-width {
+    width: 100%;
+}
