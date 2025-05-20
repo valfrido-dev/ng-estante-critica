@@ -6,10 +6,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
 import { NgForOf, NgIf } from '@angular/common';
 import { BookService } from '../book-service/book.service';
 import { Book } from '../models/book';
 import { RouterLink } from '@angular/router';
+
+export interface SearchParams {
+  key: string;
+  value: string;
+}
+
 
 @Component({
   selector: 'app-home',
@@ -21,6 +28,7 @@ import { RouterLink } from '@angular/router';
     FormsModule,
     MatTabsModule,
     MatCardModule,
+    MatRadioModule,
     NgIf,
     NgForOf,
     RouterLink
@@ -31,12 +39,14 @@ import { RouterLink } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   searchBooks: string = '';
+  protected typeSearch: string;
   protected listTopFive: Book[];
   protected listTopFiveByFantasy: Book[];
   protected listTopFiveByRomance: Book[];
   protected listResultSearch: Book[];
 
-  constructor(private bookService: BookService) { 
+  constructor(private bookService: BookService) {
+    this.typeSearch = 'title';
     this.listTopFive = [];
     this.listTopFiveByFantasy = [];
     this.listTopFiveByRomance = [];
@@ -49,14 +59,17 @@ export class HomeComponent implements OnInit {
     this.loadTopBooksByRomance();
   }
 
+  changeTypeSearch(): void {
+    this.searchBooksAction();
+  }
+
   searchBooksAction(): void {
     if (this.searchBooks !== null && this.searchBooks.trim().length > 0) {
-      this.bookService.searchBooks(this.searchBooks, '')
+      this.clearLists();
+      const search: SearchParams = this.getSearchParams(this.typeSearch, this.searchBooks);
+      this.bookService.searchBooks(search)
       .subscribe(resp => {
         this.listResultSearch = resp;
-        this.listTopFive = [];
-        this.listTopFiveByFantasy = [];
-        this.listTopFiveByRomance = [];
       });
     } else {
       this.loadTopFiveBooks();
@@ -74,17 +87,25 @@ export class HomeComponent implements OnInit {
   }
 
   loadTopBooksByFantasy(): void {
-    this.bookService.searchBooks('', 'fantasy')
+    const search: SearchParams = this.getSearchParams('category', 'fantasy');
+    this.bookService.searchBooks(search)
     .subscribe(resp => {
       this.listTopFiveByFantasy = this.getFirstFives(resp);
     });
   }
 
   loadTopBooksByRomance(): void {
-    this.bookService.searchBooks('', 'romance')
+    const search: SearchParams = this.getSearchParams('category', 'romance');
+    this.bookService.searchBooks(search)
     .subscribe(resp => {
       this.listTopFiveByFantasy = this.getFirstFives(resp);
     });
+  }
+
+  private clearLists(): void {
+    this.listTopFive = [];
+    this.listTopFiveByFantasy = [];
+    this.listTopFiveByRomance = [];
   }
 
   private getFirstFives(list: Book[]): Book[] {
@@ -92,6 +113,14 @@ export class HomeComponent implements OnInit {
       return list.slice(0,5);
     }
     return list;
+  }
+
+  private getSearchParams(key: string, value: string): SearchParams {
+    let searchParams: SearchParams = {
+      key: key,
+      value: value
+    };
+    return searchParams;
   }
 
 

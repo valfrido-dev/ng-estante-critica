@@ -52,13 +52,13 @@
 <div class="book-detail-container margin-comments">
     <mat-card class="book-detail-card" appearance="outlined" *ngFor="let review of reviews;">
         <mat-card-header>
-            <mat-card-title>
-                <span>{{review.userOwner}}</span>
-            </mat-card-title>
-            <mat-card-subtitle>                
-                <mat-icon>star</mat-icon>
-                <span>{{review.numberRating}}</span>
-            </mat-card-subtitle>
+            <mat-card-title-group>
+                <mat-card-subtitle>{{review.userOwner}}</mat-card-subtitle>
+                <div  class="row rate-item-view">
+                    <mat-icon>star</mat-icon>
+                    <span class="span-number-rate">{{review.numberRating}}</span>
+                </div>
+            </mat-card-title-group>
         </mat-card-header>
         <mat-card-content>
             <p>{{review.comments}}</p>

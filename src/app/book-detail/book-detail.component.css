@@ -48,3 +48,19 @@
 .full-width {
     width: 100%;
 }
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.rate-item-view {
+    padding-left: 1rem;
+    align-items: center;
+}
+
+.rate-item-view .span-number-rate {
+    margin-top: 1%;
+}

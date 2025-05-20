@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Book } from '../models/book';
 import { BookReview } from '../models/book-review';
 import { BookRegister } from '../models/book-register';
+import { SearchParams } from '../home/home.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  searchBooks(title: string, category: string): Observable<Book[]> {
-    const params = this.getSearchParams(title, category);
+  searchBooks(searchParams: SearchParams): Observable<Book[]> {
+    const params = this.getSearchParams(searchParams);
     return this.http.get<Book[]>(this.apiBaseUrl + '/books/find', {headers: this.headers, params: params}
   )};
 
@@ -44,23 +45,8 @@ export class BookService {
     {bookId: bookId, numberRating: numberRating, comments: comments}, {headers: this.headers}
   )};
 
-  private getSearchParams(title: string, category: string): HttpParams {
-
-    if (title !== null && title.trim().length > 0 &&
-          category !== null && category.trim().length > 0) {
-      return new HttpParams().set('title', title).set('category', category);
-    
-    }
-
-
-    if (title !== null && title.trim().length > 0) {
-      return new HttpParams().set('title', title);
-    }
-
-    if (category !== null && category.trim().length > 0) {
-      return new HttpParams().set('category', category);
-    }
-    return new HttpParams();
+  private getSearchParams(searchParams: SearchParams): HttpParams {
+    return new HttpParams().set(searchParams.key, searchParams.value);
   }
 
 }

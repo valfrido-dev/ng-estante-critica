@@ -1,6 +1,15 @@
 <div class="home-container">
     <mat-grid-list cols="10" rowHeight="1:1">
         <mat-grid-tile colspan="10">
+            <div class="margin-top-check">
+                <mat-radio-group [(ngModel)]="typeSearch" (change)="changeTypeSearch()">
+                    <mat-radio-button value="title">Por título</mat-radio-button>
+                    <mat-radio-button value="category">Por gênero</mat-radio-button>
+                    <mat-radio-button value="author">Por autor</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="10">
             <mat-form-field class="search-input-width">
                 <mat-label>Procure um livro</mat-label>
                 <input matInput type="text" [(ngModel)]="searchBooks" name="searchBooks" (blur)="searchBooksAction()">
@@ -8,91 +17,97 @@
             </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="10" *ngIf="searchBooks && listResultSearch && listResultSearch.length > 0">
-            <div class="row full-width start-itens title-home-lists">
-                <h3>Resultados....</h3>
-            </div>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="2" *ngFor="let book of listResultSearch;">
-            <mat-card class="full-width" appearance="outlined" [routerLink]="['/book/detail/book.id']">
-                <mat-card-header>
-                    <mat-card-title-group>
-                        <mat-card-title>{{book.title}}</mat-card-title>
-                        <img mat-card-sm-image src="{{book.thumbnail}}" >
-                    </mat-card-title-group>
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="row rate-item-view">
-                        <mat-icon>star</mat-icon>
-                        <span class="span-number-rate">{{book.numberAverageRating}}</span>
-                        <span class="itens-card-footer-spacer"></span>
-                        <button
-                            mat-icon-button
-                            matSuffix
-                            [routerLink]="['/book/detail', book.id]">
-                            <mat-icon>zoom_in</mat-icon>
-                        </button>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-        </mat-grid-tile>
+        <div *ngIf="searchBooks && listResultSearch && listResultSearch.length > 0">
+            <mat-grid-tile colspan="10">
+                <div class="row full-width start-itens title-home-lists">
+                    <h3>Resultados....</h3>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2" *ngFor="let book of listResultSearch;">
+                <mat-card class="full-width" appearance="outlined" [routerLink]="['/book/detail/book.id']">
+                    <mat-card-header>
+                        <mat-card-title-group>
+                            <mat-card-title class="text-title-card">{{book.title}}</mat-card-title>
+                            <img mat-card-sm-image src="{{book.thumbnail}}" >
+                        </mat-card-title-group>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row rate-item-view">
+                            <mat-icon>star</mat-icon>
+                            <span class="span-number-rate">{{book.numberAverageRating}}</span>
+                            <span class="itens-card-footer-spacer"></span>
+                            <button
+                                mat-icon-button
+                                matSuffix
+                                [routerLink]="['/book/detail', book.id]">
+                                <mat-icon>zoom_in</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+        </div>
 
-        <mat-grid-tile colspan="10" *ngIf="!searchBooks && listTopFive && listTopFive.length > 0">
-            <div class="row full-width start-itens title-home-lists">
-                <h3>Os 5 melhores livros....</h3>
-            </div>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="2" *ngFor="let book of listTopFive;">
-            <mat-card class="full-width" appearance="outlined" [routerLink]="['/book/detail/book.id']">
-                <mat-card-header>
-                    <mat-card-title-group>
-                        <mat-card-title>{{book.title}}</mat-card-title>
-                        <img mat-card-sm-image src="{{book.thumbnail}}" >
-                    </mat-card-title-group>
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="row rate-item-view">
-                        <mat-icon>star</mat-icon>
-                        <span class="span-number-rate">{{book.numberAverageRating}}</span>
-                        <span class="itens-card-footer-spacer"></span>
-                        <button
-                            mat-icon-button
-                            matSuffix
-                            [routerLink]="['/book/detail', book.id]">
-                            <mat-icon>zoom_in</mat-icon>
-                        </button>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-        </mat-grid-tile>
+        <div *ngIf="!searchBooks && listTopFive && listTopFive.length > 0">
+            <mat-grid-tile colspan="10">
+                <div class="row full-width start-itens title-home-lists">
+                    <h3>Os 5 melhores livros....</h3>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2" *ngFor="let book of listTopFive;">
+                <mat-card class="full-width" appearance="outlined" [routerLink]="['/book/detail/book.id']">
+                    <mat-card-header>
+                        <mat-card-title-group>
+                            <mat-card-title class="text-title-card">{{book.title}}</mat-card-title>
+                            <img mat-card-sm-image src="{{book.thumbnail}}" >
+                        </mat-card-title-group>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row rate-item-view">
+                            <mat-icon>star</mat-icon>
+                            <span class="span-number-rate">{{book.numberAverageRating}}</span>
+                            <span class="itens-card-footer-spacer"></span>
+                            <button
+                                mat-icon-button
+                                matSuffix
+                                [routerLink]="['/book/detail', book.id]">
+                                <mat-icon>zoom_in</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+        </div>
         
-        <mat-grid-tile colspan="10" *ngIf="!searchBooks && listTopFiveByFantasy && listTopFiveByFantasy.length > 0">
-            <div class="row full-width start-itens title-home-lists">
-                <h3>Os 5 melhores livros de fantasia....</h3>
-            </div>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="2" *ngFor="let book of listTopFiveByFantasy;">
-            <mat-card class="full-width" appearance="outlined">
-                <mat-card-header>
-                    <mat-card-title-group>
-                        <mat-card-title>{{book.title}}</mat-card-title>
-                        <img mat-card-sm-image src="{{book.thumbnail}}" >
-                    </mat-card-title-group>
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="row rate-item-view">
-                        <mat-icon>star</mat-icon>
-                        <span class="span-number-rate">{{book.numberAverageRating}}</span>
-                        <span class="itens-card-footer-spacer"></span>
-                        <button
-                            mat-icon-button
-                            matSuffix
-                            [routerLink]="['/book/detail', book.id]">
-                            <mat-icon>zoom_in</mat-icon>
-                        </button>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-        </mat-grid-tile>
+        <div *ngIf="!searchBooks && listTopFiveByFantasy && listTopFiveByFantasy.length > 0">
+            <mat-grid-tile colspan="10" *ngIf="!searchBooks && listTopFiveByFantasy && listTopFiveByFantasy.length > 0">
+                <div class="row full-width start-itens title-home-lists">
+                    <h3>Os 5 melhores livros de fantasia....</h3>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2" *ngFor="let book of listTopFiveByFantasy;">
+                <mat-card class="full-width" appearance="outlined">
+                    <mat-card-header>
+                        <mat-card-title-group>
+                            <mat-card-title class="text-title-card">{{book.title}}</mat-card-title>
+                            <img mat-card-sm-image src="{{book.thumbnail}}" >
+                        </mat-card-title-group>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row rate-item-view">
+                            <mat-icon>star</mat-icon>
+                            <span class="span-number-rate">{{book.numberAverageRating}}</span>
+                            <span class="itens-card-footer-spacer"></span>
+                            <button
+                                mat-icon-button
+                                matSuffix
+                                [routerLink]="['/book/detail', book.id]">
+                                <mat-icon>zoom_in</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+        </div>
     </mat-grid-list>
 </div>
