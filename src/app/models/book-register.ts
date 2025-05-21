@@ -5,5 +5,6 @@ export interface BookRegister {
     category: string;
     publisher: string;
     publicationDate: string;
+    thumbnail: string;
     synopsis: string;
 }

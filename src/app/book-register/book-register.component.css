@@ -29,3 +29,7 @@
 .full-width {
     width: 100%;
 }
+
+.textarea-synopsis-min-size {
+    min-height: 8rem;
+}

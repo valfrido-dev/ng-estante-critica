@@ -31,6 +31,10 @@ export class UserRegisterComponent implements OnInit {
   hidePassword = signal(true);
 
   constructor(private fb: FormBuilder, private userService: UserService, private snackBar: MatSnackBar) {
+    this.userRegisterForm = this.fb.group({});
+  }
+
+  ngOnInit(): void {
     this.userRegisterForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       username: ['', [Validators.required, Validators.minLength(6)]],
@@ -38,8 +42,6 @@ export class UserRegisterComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
     });
   }
-
-  ngOnInit(): void { }
 
   showHidePasswordEvent(event: MouseEvent): void {
       this.hidePassword.set(!this.hidePassword());

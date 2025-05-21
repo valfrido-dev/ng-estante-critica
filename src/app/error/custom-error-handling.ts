@@ -6,6 +6,10 @@ export class CustomErrorHandling implements ErrorHandler {
     private _snackBar = inject(MatSnackBar);
 
     handleError(error: any): void {
+        if (error.status === 200) {
+            return;
+        }
+        
         let message: string = '';
         if (error instanceof ProgressEvent) {
             message = "Erro para acessar API";

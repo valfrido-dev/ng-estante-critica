@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { BookService } from '../book-service/book.service';
 import { BookRegister } from '../models/book-register';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -30,11 +31,17 @@ import { BookRegister } from '../models/book-register';
   styleUrl: './book-register.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookRegisterComponent implements OnInit {
+export class BookRegisterComponent implements OnInit, OnDestroy {
 
   protected bookRegisterForm: FormGroup;
+  protected subscription: Subscription;
 
   constructor(private fb: FormBuilder, private bookService: BookService, private snackBar: MatSnackBar) {
+    this.subscription = new Subscription();
+    this.bookRegisterForm = this.fb.group({});
+  }
+
+  ngOnInit(): void {
     this.bookRegisterForm = this.fb.group({
       title: ['', Validators.required],
       subtitle: [''],
@@ -42,11 +49,14 @@ export class BookRegisterComponent implements OnInit {
       category: ['', Validators.required],
       publisher: ['', Validators.required],
       publicationDate: ['', Validators.required],
+      thumbnailLink: [''],
       synopsis: ['']
     });
-  }
+   }
 
-  ngOnInit(): void { }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   setPublicationDate(normalizedMonthAndYear: Date, datepicker: MatDatepicker<Date>) {
     const dateValue = this.bookRegisterForm.value.publicationDate;
@@ -56,11 +66,12 @@ export class BookRegisterComponent implements OnInit {
     datepicker.close();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.bookRegisterForm.valid) {
       let newBook: BookRegister = this.getNewBook();
-      this.bookService.bookRegister(newBook).subscribe(message => {
-        this.showSuccessSnackbar(message);
+      console.log("show call save book ", newBook);
+      this.subscription = this.bookService.bookRegister(newBook).subscribe(() => {
+        this.showSuccessSnackbar("Livro cadastrado com sucesso!");
       });
     }
   }
@@ -72,7 +83,8 @@ export class BookRegisterComponent implements OnInit {
       authors: this.getAuthors(),
       category: this.bookRegisterForm.value.category,
       publisher: this.bookRegisterForm.value.publisher,
-      publicationDate: this.bookRegisterForm.value.publicationDate,
+      publicationDate: this.bookRegisterForm.value.publicationDate.toString(),
+      thumbnail: this.bookRegisterForm.value.thumbnailLink,
       synopsis: this.bookRegisterForm.value.synopsis
     };
     return newBook;
