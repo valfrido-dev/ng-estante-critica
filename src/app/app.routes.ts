@@ -6,12 +6,14 @@ import { BookRegisterComponent } from './book-register/book-register.component';
 import { HomeComponent } from './home/home.component';
 import { LoginActivate } from './auth-service/login-activate';
 import { BookDetailComponent } from './book-detail/book-detail.component';
+import { UserLibraryComponent } from './user-library/user-library.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'user/register', component: UserRegisterComponent },
     { path: 'home', component: HomeComponent, canActivate: [LoginActivate] },
     { path: 'user/list', component: UserListComponent, canActivate: [LoginActivate] },
+    { path: 'user/libray', component: UserLibraryComponent, canActivate: [LoginActivate] },
     { path: 'book/register', component: BookRegisterComponent, canActivate: [LoginActivate] },
     { path: 'book/detail/:bookId', component: BookDetailComponent, canActivate: [LoginActivate] },
     { path: '', redirectTo: 'home', pathMatch: 'full' }

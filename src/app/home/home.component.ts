@@ -106,6 +106,7 @@ export class HomeComponent implements OnInit {
     this.listTopFive = [];
     this.listTopFiveByFantasy = [];
     this.listTopFiveByRomance = [];
+    this.listResultSearch = [];
   }
 
   private getFirstFives(list: Book[]): Book[] {

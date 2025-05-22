@@ -12,6 +12,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { BookService } from '../book-service/book.service';
 import { BookRegister } from '../models/book-register';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class BookRegisterComponent implements OnInit, OnDestroy {
   protected bookRegisterForm: FormGroup;
   protected subscription: Subscription;
 
-  constructor(private fb: FormBuilder, private bookService: BookService, private snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder, private bookService: BookService,
+    private snackBar: MatSnackBar, private route: Router) {
     this.subscription = new Subscription();
     this.bookRegisterForm = this.fb.group({});
   }
@@ -69,9 +71,9 @@ export class BookRegisterComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     if (this.bookRegisterForm.valid) {
       let newBook: BookRegister = this.getNewBook();
-      console.log("show call save book ", newBook);
-      this.subscription = this.bookService.bookRegister(newBook).subscribe(() => {
-        this.showSuccessSnackbar("Livro cadastrado com sucesso!");
+      this.subscription = this.bookService.bookRegister(newBook).subscribe(book => {
+        this.showSuccessSnackbar('Livro, book.title, cadastrado com sucesso!');
+        this.goHome();
       });
     }
   }
@@ -103,6 +105,10 @@ export class BookRegisterComponent implements OnInit, OnDestroy {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  }
+
+  private goHome(): void {
+    this.route.navigate(['/Home']);
   }
 
 

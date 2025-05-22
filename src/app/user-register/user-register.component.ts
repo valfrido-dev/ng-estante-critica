@@ -9,6 +9,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../user-service/user.service';
 import { NewUser } from '../models/user';
+import { Router } from '@angular/router';
+import { NgIf } from '@angular/common';
+import { min } from 'rxjs';
 
 @Component({
   selector: 'app-user-register',
@@ -19,7 +22,8 @@ import { NewUser } from '../models/user';
     ReactiveFormsModule,
     MatButtonModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    NgIf
   ],
   templateUrl: './user-register.component.html',
   styleUrl: './user-register.component.css',
@@ -30,7 +34,8 @@ export class UserRegisterComponent implements OnInit {
   protected userRegisterForm: FormGroup;
   hidePassword = signal(true);
 
-  constructor(private fb: FormBuilder, private userService: UserService, private snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder, private userService: UserService,
+      private snackBar: MatSnackBar, private route: Router) {
     this.userRegisterForm = this.fb.group({});
   }
 
@@ -53,8 +58,14 @@ export class UserRegisterComponent implements OnInit {
       let newUser: NewUser = this.getNewUser();
       this.userService.saveUser(newUser).subscribe(() => {
         this.showSuccessSnackbar('Usuário cadastrado com sucesso!');
+        this.goLogin();
       });
     }
+  }
+
+  hasFormError(controlName: string, errorName: string): boolean {
+    console.log(this.userRegisterForm.controls[controlName]);
+    return this.userRegisterForm.controls[controlName].hasError(errorName);
   }
 
   private getNewUser(): NewUser {
@@ -74,6 +85,10 @@ export class UserRegisterComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  }
+
+  private goLogin(): void {
+    this.route.navigate(['/login']);
   }
 
 }

@@ -12,7 +12,7 @@
         <mat-grid-tile colspan="10">
             <mat-form-field class="search-input-width">
                 <mat-label>Procure um livro</mat-label>
-                <input matInput type="text" [(ngModel)]="searchBooks" name="searchBooks" (blur)="searchBooksAction()">
+                <input matInput type="text" [(ngModel)]="searchBooks" name="searchBooks" (blur)="searchBooksAction()" (keydown.enter)="searchBooksAction()">
                 <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
         </mat-grid-tile>
@@ -24,7 +24,7 @@
                 </div>
             </mat-grid-tile>
             <mat-grid-tile colspan="2" *ngFor="let book of listResultSearch;">
-                <mat-card class="full-width" appearance="outlined" [routerLink]="['/book/detail/book.id']">
+                <mat-card class="full-width" appearance="outlined">
                     <mat-card-header>
                         <mat-card-title-group>
                             <mat-card-title class="text-title-card">{{book.title}}</mat-card-title>
@@ -55,7 +55,7 @@
                 </div>
             </mat-grid-tile>
             <mat-grid-tile colspan="2" *ngFor="let book of listTopFive;">
-                <mat-card class="full-width" appearance="outlined" [routerLink]="['/book/detail/book.id']">
+                <mat-card class="full-width" appearance="outlined">
                     <mat-card-header>
                         <mat-card-title-group>
                             <mat-card-title class="text-title-card">{{book.title}}</mat-card-title>

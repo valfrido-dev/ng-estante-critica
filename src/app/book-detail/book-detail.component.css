@@ -5,16 +5,27 @@
     padding: 20px; /* Espaço para pequenos dispositivos */
 }
 
-.margin-comments {
+.comments-container {
     margin-top: -5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Espaço para pequenos dispositivos */
 }
 
 .book-detail-card {
-    width: 100%;        /* Ocupa 100% do espaço disponível */
-    max-width: 900px;   /* Limita a largura máxima, ajuste esse valor conforme preferir */
-    box-sizing: border-box; /* Garante que padding e border sejam considerados no width */
-    padding: 1rem;      /* Espaçamento interno opcional */
-    margin: 2rem auto;       /* Centraliza horizontalmente caso o flex do container não seja aplicado */
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+    padding: 1rem;
+    margin: 2rem auto;
+}
+
+.comments-card {
+    width: 100%; 
+    max-width: 900px;
+    box-sizing: border-box;
+    padding: 1rem;
+    margin: 2rem auto;
 }
 
 .header-title {

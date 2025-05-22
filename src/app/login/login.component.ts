@@ -41,8 +41,9 @@ export class LoginComponent implements OnInit  {
   ngOnInit(): void { }
 
   clickEvent(event: MouseEvent) {
-      this.hide.set(!this.hide());
-      event.stopPropagation();
+    console.log('Evento: ', event);
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
   
   onSubmit(): void {

@@ -1,3 +1,7 @@
 .itens-menu-spacer {
   flex: 1 1 auto;
 }
+
+.cursor-home {
+  cursor: pointer;
+}

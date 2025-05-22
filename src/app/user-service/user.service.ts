@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { NewUser, User } from '../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -18,8 +17,8 @@ export class UserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  saveUser(newUser: NewUser): Observable<string> {
-    return this.http.post<string>(this.apiBaseUrl + '/users/user/register', newUser, this.httpOptions
+  saveUser(newUser: NewUser): Observable<User> {
+    return this.http.post<User>(this.apiBaseUrl + '/users/user/register', newUser, this.httpOptions
   )};
 
   setAdminUser(userId: string, isAdmin: boolean): Observable<any> {

@@ -33,6 +33,7 @@ export class BookDetailComponent implements OnInit {
   protected reviews!: BookReview[];
   protected bookRate: number[];
   protected bookRateHalf: boolean;
+  protected bookInLibraryUser: boolean;
   @Input() bookId: string;
 
 
@@ -40,6 +41,7 @@ export class BookDetailComponent implements OnInit {
     this.bookId = '';
     this.bookRate = [];
     this.bookRateHalf = false;
+    this.bookInLibraryUser = false;
   }
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class BookDetailComponent implements OnInit {
       this.setBookRateInt(this.bookDetail.numberAverageRating);
       this.setBookRateHalf(this.bookDetail.numberAverageRating);
       this.loadBookReviews(this.bookDetail.id);
+      this.verifyBookLibrary(this.bookDetail.id, this.bookDetail.title);
     });
   }
 
@@ -71,6 +74,31 @@ export class BookDetailComponent implements OnInit {
       if (result) {
         this.rating(result);
       }
+    });
+  }
+
+  verifyBookLibrary(bookId: string, title: string): void {
+    this.bookService.hasBookInLibraryUser(bookId, title)
+    .subscribe(book => {
+      this.bookInLibraryUser = book.hasBook;
+    });
+  }
+
+  addBookLibrary(): void {
+    this.bookService.addBookInLibraryUser(this.bookDetail.id, this.bookDetail.title, this.bookInLibraryUser)
+    .subscribe(book => {
+      this.bookInLibraryUser = book.hasBook;
+      let message: string = 'Livro, ' + book.bookTitle + ', adicionado a lista de interesse!';
+      this.showSuccessSnackbar(message);
+    });
+  }
+
+  removeBookLibrary(): void {
+    this.bookService.removeBookInLibraryUser(this.bookDetail.id, this.bookDetail.title, this.bookInLibraryUser)
+    .subscribe(book => {
+      this.bookInLibraryUser = book.hasBook;
+      let message: string = 'Livro, ' + book.bookTitle + ', removido da lista de interesse!';
+      this.showSuccessSnackbar(message);
     });
   }
 

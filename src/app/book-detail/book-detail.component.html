@@ -46,11 +46,14 @@
         <mat-card-actions>
             <button mat-button (click)="ratingActionDialog()">Avaliar</button>
             <button mat-button [routerLink]="['/home']">Voltar</button>
+            <span class="itens-spacer"></span>
+            <button mat-button (click)="addBookLibrary()" *ngIf="!bookInLibraryUser">Adicionar Minha Lista</button>
+            <button mat-button (click)="removeBookLibrary()" *ngIf="bookInLibraryUser">Remover Minha Lista</button>
         </mat-card-actions>
     </mat-card>
 </div>
-<div class="book-detail-container margin-comments">
-    <mat-card class="book-detail-card" appearance="outlined" *ngFor="let review of reviews;">
+<div class="comments-container">
+    <mat-card class="comments-card" appearance="outlined" *ngFor="let review of reviews;">
         <mat-card-header>
             <mat-card-title-group>
                 <mat-card-subtitle>{{review.userOwner}}</mat-card-subtitle>
